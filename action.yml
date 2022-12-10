@@ -1,0 +1,19 @@
+name: 'Authenticate UPM Scoped Registry'
+description: 'Authenticate Unity package manager scoped registry using the specified token and URL.'
+inputs:
+  url:
+    description: 'URL for the UPM scoped registry'
+    required: true
+  token:
+    description: 'Authentication token to use'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: 'Update UPM Configuration'
+      run: |
+        mkdir -p ${{ runner.temp }}/_github_home
+        cd ${{ runner.temp }}/_github_home
+        echo "[npmAuth.\"${{ inputs.url }}\"]" >> .upmconfig.toml
+        echo "alwaysAuth = true" >> .upmconfig.toml
+        echo "token = \"${{ inputs.token }}\"" >> .upmconfig.toml
