@@ -11,6 +11,7 @@ runs:
   using: "composite"
   steps:
     - name: 'Update UPM Configuration'
+      shell: bash
       run: |
         mkdir -p ${{ runner.temp }}/_github_home
         cd ${{ runner.temp }}/_github_home
